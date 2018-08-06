@@ -1,10 +1,5 @@
 package gpx
 
-import (
-	"encoding/xml"
-	"io"
-)
-
 // GPX is the root element in the XML file
 type Gpx struct {
 	Version    string   `xml:"version,attr"`         // You must include the version number in your GPX document
@@ -104,11 +99,4 @@ type Wpt struct {
 	Ageofdgpsdata float64 `xml:"ageofdgpsdata,omitempty"` // Number of seconds since last DGPS update
 	Dgpsid        float64 `xml:"dgpsid,omitempty"`        // ID of DGPS station used in differential correction
 	Extensions    []byte  `xml:"extensions,omitempty"`    // You can add extend GPX by adding your own elements from another schema here
-}
-
-func Load(r io.Reader) (Gpx, error) {
-
-	var gpx Gpx
-	err := xml.NewDecoder(r).Decode(&gpx)
-	return gpx, err
 }
